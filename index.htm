@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <title>特編の時間割のページ</title>
+    <style>
+        *{
+            font-size: 30px;
+        }
+        body{
+            text-align: center;
+            background-color:black;
+            color:white;
+        }
+        #mainMoji{
+            font-size: 40px;
+            color: red;
+            font-weight:900;
+        }
+        #tab{
+            width:90vw;
+            margin:auto;
+            border-collapse: collapse;
+        }
+        #toggle{
+            width:50vw;
+            height:50px;
+        }
+        th,td{
+            border: 1px solid #fff;
+        }
+        th{
+            background-color:#400;
+            color:#0ff;
+        }
+        tr{
+            height:2rem;
+        }
+
+        #mob-con{
+            display:flex; 
+            gap:8px; 
+            justify-content:space-around; 
+            align-items:center;
+            position:fixed; 
+            left:0; 
+            right:0; 
+            bottom:0;
+            padding:10px 10px calc(10px + env(safe-area-inset-bottom,0px));
+            border-top:1px solid #fff;
+        }
+        #mob-con button{
+            flex:1; 
+            font-size:1rem;
+            padding:8px 4px;
+        }
+    </style>
+    
+</head>
+<body>
+    <hr>
+    <p></p><img src="./to.png" ><span id="mainMoji">前期特編時間割表示システム</span><img src="./to.png" ></p>
+
+    <div id="main">
+<input type="button" id="toggle" value="全部/1日ずつ">
+
+<br>
+<hr>
+<div style="text-align:left">
+<label>組：<select id="kumi" >
+  <option value="1"         >1</option>
+  <option value="2"         >2</option>
+  <option value="3"         >3</option>
+  <option value="4"         >4</option>
+  <option value="5"         >5</option>
+  <option value="6" selected>6</option>
+  <option value="7"         >7</option>
+  <option value="8"         >8</option>
+</select>
+</label>
+
+<br>
+<label>講座：<select id="koza" >
+  <option value="a"         >A</option>
+  <option value="b"         >B</option>
+  <option value="c"         >C</option>
+  <option value="k"         >K</option>
+  <option value="l" selected>L</option>
+  <option value="m"         >M</option>
+  <option value="n"         >N</option>
+  <option value="o"         >O</option>
+</select>
+</label>
+</div>
+
+<br>
+<hr>
+<table id="tab">
+  <caption>あなたの時間割</caption>
+  <colgroup>
+    <col style="width: 3rem;">
+  </colgroup>
+  <thead>
+    <tr id="tr">
+      <th >時限</th>
+      <th id="date">11/30</th>
+    </tr>
+  </thead>
+  <tbody id="tabbody">
+  </tbody>
+</table>
+
+<div id="mob-con">
+  <button id="m-left">←</button>
+  <button id="m-right">→</button>
+</div>
+    </div>
+    <hr>
+        <p>since 2026/11/19</p>
+        <p>最終更新日：2026/11/19</p>
+    <p>================</p>
+    <p>Copyright © 2026 legrs4073</p>
+    <a href="https://x.com/legrs4073">Twitter</a>
+    <a>mail:ktgwyi01@gmail.com</a>
+    </p>
+
+    <script src="js.js">
+    </script>
+
+    <footer>
+        a
+    </footer>
+</body>
+</html>
