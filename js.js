@@ -224,9 +224,9 @@ document.addEventListener("click",()=>{
     cal();
     document.cookie = `dat=${kumi.value}${koza.value}${lightmode.checked}`;
 })
-lightmode.addEventListener("click",()=>{
+function updatetheme(){
+
     if(lightmode.checked){
-        console.log("a")
         root.style.setProperty("--bg", "#ece9d8");
         root.style.setProperty("--fc", "#000");
         root.style.setProperty("--bg2", "#aff");
@@ -239,7 +239,9 @@ lightmode.addEventListener("click",()=>{
         root.style.setProperty("--fc2", "#0ff");
         root.style.setProperty("--fc3", "#aaa");
     }
-
+}
+lightmode.addEventListener("click",()=>{
+    updatetheme();
 })
 
 if(document.cookie=="data=" || document.cookie==""){
@@ -263,6 +265,7 @@ if(document.cookie=="data=" || document.cookie==""){
     lightmode.checked = lm_c;
 
 
+    updatetheme();
 }
 
 
