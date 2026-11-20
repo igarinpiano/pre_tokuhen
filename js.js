@@ -254,8 +254,12 @@ if(document.cookie=="data=" || document.cookie==""){
         lm_c = true;
     }
 
-    kumi.value = kumi_c;
-    koza.value = koza_c;
+    if(1 <= parseInt(kumi_c,10) && parseInt(kumi_c,10) <= 8){
+        kumi.value = kumi_c;
+    }
+    if(koza_val.indexOf(koza_c) != -1){
+        koza.value = koza_c;
+    }
     lightmode.checked = lm_c;
 
 
