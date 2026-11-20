@@ -8,6 +8,8 @@ let date = document.getElementById("date");
 let koza = document.getElementById("koza");
 let kumi = document.getElementById("kumi");
 let cap = document.getElementById("cap");
+let lightmode = document.getElementById("lightmode");
+const root = document.documentElement;
 
 
 let koza_val=[
@@ -73,7 +75,7 @@ const dat=[
         [8,1,7,15], //8/K
     ],
     [
-        ["12.01",0], //header
+        ["11.20",0], //header
         [14,15,17,0], //1/A
         [4,15,11,2], //2/B
         [4,15,11,0], //3/B
@@ -84,7 +86,7 @@ const dat=[
         [8,0,11,2], //8/K
     ],
     [
-        ["12.02",1], //header
+        ["12.2",1], //header
         [2,16,14,10,6], //1/A
         [1,16,4,10,19], //2/B
         [2,18,4,5,16], //3/B
@@ -98,16 +100,22 @@ const dat=[
 
 
 
+
 /////////////////
 
 let d = 0;
 
+let islightmode = false;
 /////////////////
 
-function add(i,content,doSpan){
+function add(i,content,doSpan,doGrayout){
     const tr1 = document.createElement("tr");
     const td1 = document.createElement("td");
     const td2 = document.createElement("td");
+    if(doGrayout){
+        td1.style.color = "var(--fc3)";
+        td2.style.color = "var(--fc3)";
+    }
     if(i==0){
         td1.textContent = "";
     }else{
@@ -123,6 +131,12 @@ function add(i,content,doSpan){
         const tr1_p = document.createElement("tr");
         const td1_p = document.createElement("td");
         const td2_p = td2.cloneNode(true);
+
+        if(doGrayout){
+            td1_p.style.color = "var(--fc3)";
+            td2_p.style.color = "var(--fc3)";
+        }
+
         td1_p.textContent = String(i+1);
         tr1_p.append(td1_p);
         tr1_p.append(td2_p);
@@ -143,14 +157,24 @@ left.addEventListener("click",()=>{
     d--;
 })
 
+/////////////           today
 
-//for(let i=1; i<=3; i++){
-//    add(i,classes[dat[0][1][i-1]])
-//}
-//add(0,"SHR")
-//for(let i=4; i<=6; i++){
-//    add(i,classes[dat[0][1][i-1]])
-//}
+const today = new Date();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+
+let todaystr = `${month}.${day}`;
+
+let today_i = 0;
+
+for(let i =0;i<dat.length;i++){
+    if(dat[i][0][0] == todaystr){
+        today_i = i;
+        break;
+    }
+}
+
+////            cal
 
 function cal(){
 
@@ -161,38 +185,83 @@ function cal(){
 
     date.textContent = dat[d][0][0]
 
-    if(dat[d][0][1] == 0){
-        add(1,classes[dat[d][koza_i][0]],false)
-        add(2,classes[dat[d][kumi_i][1]],true)
-
-        add(0,classes[20],false)
-        add(4,classes[dat[d][koza_i][2]],false)
-        add(5,classes[dat[d][kumi_i][3]],true)
-
-    }else if(dat[d][0][1] == 1){
-        add(1,classes[dat[d][kumi_i][0]],true)
-
-        add(3,classes[dat[d][koza_i][1]],false)
-        add(0,classes[20],false)
-        add(4,classes[dat[d][koza_i][2]],false)
-        add(5,classes[dat[d][koza_i][3]],false)
-        add(6,classes[dat[d][koza_i][4]],false)
-    }else if(dat[d][0][1] == 2){
-        add(1,classes[dat[d][koza_i][0]],false)
-        add(2,classes[dat[d][koza_i][1]],false)
-        add(3,classes[dat[d][koza_i][2]],false)
-        add(0,classes[20],false)
-        add(4,classes[dat[d][kumi_i][3]],true)
-
-        add(6,classes[dat[d][koza_i][4]],false)
+    let isprev = false;
+    if(d < today_i){
+        isprev = true;
     }
 
-    cap.textContent = `${kumi.value}組 ${koza.value.toUpperCase()}講座(下で設定)`
+    if(dat[d][0][1] == 0){
+        add(1,classes[dat[d][koza_i][0]],false,isprev)
+        add(2,classes[dat[d][kumi_i][1]],true,isprev)
+
+        add(0,classes[20],false,isprev)
+        add(4,classes[dat[d][koza_i][2]],false,isprev)
+        add(5,classes[dat[d][kumi_i][3]],true,isprev)
+
+    }else if(dat[d][0][1] == 1){
+        add(1,classes[dat[d][kumi_i][0]],true,isprev)
+
+        add(3,classes[dat[d][koza_i][1]],false,isprev)
+        add(0,classes[20],false,isprev)
+        add(4,classes[dat[d][koza_i][2]],false,isprev)
+        add(5,classes[dat[d][koza_i][3]],false,isprev)
+        add(6,classes[dat[d][koza_i][4]],false,isprev)
+    }else if(dat[d][0][1] == 2){
+        add(1,classes[dat[d][koza_i][0]],false,isprev)
+        add(2,classes[dat[d][koza_i][1]],false,isprev)
+        add(3,classes[dat[d][koza_i][2]],false,isprev)
+        add(0,classes[20],false,isprev)
+        add(4,classes[dat[d][kumi_i][3]],true,isprev)
+
+        add(6,classes[dat[d][koza_i][4]],false,isprev)
+    }
+
+    cap.textContent = `${kumi.value}組 ${koza.value.toUpperCase()}講座　(下で設定)`
+
 }
 
 document.addEventListener("click",()=>{
     cal();
+    document.cookie = `dat=${kumi.value}${koza.value}${lightmode.checked}`;
 })
+lightmode.addEventListener("click",()=>{
+    if(lightmode.checked){
+        console.log("a")
+        root.style.setProperty("--bg", "#ece9d8");
+        root.style.setProperty("--fc", "#000");
+        root.style.setProperty("--bg2", "#aff");
+        root.style.setProperty("--fc2", "#f00");
+        root.style.setProperty("--fc3", "#666");
+    }else{
+        root.style.setProperty("--bg", "#000");
+        root.style.setProperty("--fc", "#fff");
+        root.style.setProperty("--bg2", "#400");
+        root.style.setProperty("--fc2", "#0ff");
+        root.style.setProperty("--fc3", "#aaa");
+    }
+
+})
+
+if(document.cookie=="data=" || document.cookie==""){
+    console.log("cookieない");
+}else{
+    console.log(document.cookie);
+
+    let kumi_c = document.cookie[5]);
+    let koza_c = document.cookie[6]);
+    let lm_c = false;
+    if(document.cookie.slice(7,-1)) == "true"){
+        lm_c = true;
+    }
+
+    kumi.value = kumi_c;
+    koza.value = koza_c;
+    lightmode.checked = lm_c;
+
+
+}
+
+
 
 cal();
 
