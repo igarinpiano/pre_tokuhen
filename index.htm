@@ -7,17 +7,39 @@
     <title>特編の時間割のページ</title>
     <style>
         *{
-            font-size: 40px;
+            font-size: 7vw;
+            font-family: sans-serif;
+        }
+        @media (min-aspect-ratio: 7/10) {
+          *{
+            font-size: 4.9vh;
+          }
         }
         body{
             text-align: center;
             background-color:black;
             color:white;
         }
+        #titlebar{
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            margin-top: -6px;
+            height:30px;
+            padding:0px;
+            background: linear-gradient(to bottom,#367feb,  #55a4fe 8%, #0058e6 25%, #0167fb 80%,#1553d2);
+            text-align:center;
+            padding-left:0px;
+        }
         #mainMoji{
-            font-size: 50px;
-            color: red;
+            display:inline;
+            padding:0px;
+            margin:0px;
+            font-size:20px; 
+            font-family:serif;
             font-weight:900;
+            color:#ffffff;
+            text-shadow:2px 2px 0 #000000;
         }
         #tab{
             width:90vw;
@@ -56,7 +78,7 @@
         }
         #mob-con button{
             flex:1; 
-            font-size:2rem;
+            font-size:1.5rem;
             height:10vh;
         }
         button{
@@ -86,16 +108,37 @@
         button:disabled{
             opacity:0.6; cursor:default;
             color:black;
-        }
+        
     </style>
     
 </head>
 <body>
-    <hr>
-    <p></p><img src="./to.png" ><span id="mainMoji">前期特編時間割表示システム</span><img src="./to.png" ></p>
+
+<div id="titlebar">
+    <img src="./to.png" height="25px" style="display:inline;">
+    <p id="mainMoji">前期特編時間割表示システム</p>
+
+</div>
+
+
+
+<table id="tab">
+  <caption style="font-size:20px;" id="cap">(組と講座を下で設定)</caption>
+  <colgroup>
+    <col style="width: 3rem;">
+  </colgroup>
+  <thead>
+    <tr id="tr">
+      <th >時限</th>
+      <th id="date">11/30</th>
+    </tr>
+  </thead>
+  <tbody id="tabbody">
+  </tbody>
+</table>
+
 
     <div id="main">
-<input type="button" id="toggle" value="全部/1日ずつ">
 
 <br>
 <hr>
@@ -127,21 +170,6 @@
 </div>
 
 <br>
-<hr>
-<table id="tab">
-  <caption>あなたの時間割</caption>
-  <colgroup>
-    <col style="width: 3rem;">
-  </colgroup>
-  <thead>
-    <tr id="tr">
-      <th >時限</th>
-      <th id="date">11/30</th>
-    </tr>
-  </thead>
-  <tbody id="tabbody">
-  </tbody>
-</table>
 
 <div id="mob-con">
     

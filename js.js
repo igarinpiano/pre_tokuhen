@@ -7,6 +7,7 @@ let left = document.getElementById("m-left");
 let date = document.getElementById("date");
 let koza = document.getElementById("koza");
 let kumi = document.getElementById("kumi");
+let cap = document.getElementById("cap");
 
 
 let koza_val=[
@@ -185,7 +186,8 @@ function cal(){
 
         add(6,classes[dat[d][koza_i][4]],false)
     }
-    
+
+    cap.textContent = `${kumi.value}組 ${koza.value.toUpperCase()}講座(下で設定)`
 }
 
 document.addEventListener("click",()=>{
