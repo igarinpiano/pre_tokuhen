@@ -3,6 +3,7 @@
 <head>
     <link rel="shortcut icon" href="favicon.ico">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>特編の時間割のページ</title>
     <style>
         *{
@@ -55,8 +56,36 @@
         }
         #mob-con button{
             flex:1; 
-            font-size:1rem;
+            font-size:2rem;
             height:10vh;
+        }
+        button{
+            cursor:pointer; 
+            border:1px solid var(--border); 
+            border-radius:3px; 
+            background: linear-gradient(to bottom,#fff,  #e4e4d9 80%,  #cfcfbf);
+            color:var(--fg); 
+            padding:4px 8px; 
+            font-size:0.85rem;
+            color:black;
+        
+        }
+        button:hover{
+            border:1px solid #000;
+            outline:3px solid #f3c44b;
+            outline-offset:-4px;
+            color:black;
+        }
+        button:active{
+            background: linear-gradient(to bottom,#cfcfbf,  #e4e4d9 20%,  #fff);
+            border:1px solid #000;
+            outline:3px solid #f3c44b;
+            outline-offset:-4px;
+            color:black;
+        }
+        button:disabled{
+            opacity:0.6; cursor:default;
+            color:black;
         }
     </style>
     
@@ -115,8 +144,9 @@
 </table>
 
 <div id="mob-con">
-  <button id="m-left">←</button>
-  <button id="m-right">→</button>
+    
+  <button id="m-left">← 前</button>
+  <button id="m-right">次 →</button>
 </div>
     </div>
     <hr>
