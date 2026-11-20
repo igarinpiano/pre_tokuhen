@@ -247,10 +247,10 @@ if(document.cookie=="data=" || document.cookie==""){
 }else{
     console.log(document.cookie);
 
-    let kumi_c = document.cookie[5]);
-    let koza_c = document.cookie[6]);
+    let kumi_c = document.cookie[5];
+    let koza_c = document.cookie[6];
     let lm_c = false;
-    if(document.cookie.slice(7,-1)) == "true"){
+    if(document.cookie.slice(7,-1) == "true"){
         lm_c = true;
     }
 
