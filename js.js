@@ -9,6 +9,7 @@ let koza = document.getElementById("koza");
 let kumi = document.getElementById("kumi");
 let cap = document.getElementById("cap");
 let lightmode = document.getElementById("lightmode");
+let capbar = document.getElementById("capbar");
 const root = document.documentElement;
 
 
@@ -232,12 +233,14 @@ function updatetheme(){
         root.style.setProperty("--bg2", "#aff");
         root.style.setProperty("--fc2", "#f00");
         root.style.setProperty("--fc3", "#666");
+        capbar.style.backgroundColor = "#ece9d8";
     }else{
         root.style.setProperty("--bg", "#000");
         root.style.setProperty("--fc", "#fff");
         root.style.setProperty("--bg2", "#400");
         root.style.setProperty("--fc2", "#0ff");
         root.style.setProperty("--fc3", "#aaa");
+        capbar.style.backgroundColor = "#013e3d";
     }
 }
 lightmode.addEventListener("click",()=>{
