@@ -23,6 +23,37 @@ let koza_val=[
 "l",
 "k"
 ]
+let color=[
+"jap", //0
+
+"mat", //1
+"mat", //2
+
+"che", //3
+"che", //4
+"che", //5
+"che",//6
+"phy",//7
+"che",//8
+"phy",//9
+
+"geo", //10
+"geo", //11
+"geo", //12
+"geo", //13
+"his", //14
+
+"eng", //15
+
+"inf",//16
+
+"pe",//17
+"pe",//18
+"pe",//19
+
+"shr",//20
+"lhr",//21
+]
 
 /*
 type:
@@ -106,10 +137,9 @@ const dat=[
 
 let d = 0;
 
-let islightmode = false;
 /////////////////
 
-function add(i,content,doSpan,doGrayout){
+function add(i,class_i,doSpan,doGrayout){
     const tr1 = document.createElement("tr");
     const td1 = document.createElement("td");
     const td2 = document.createElement("td");
@@ -123,7 +153,8 @@ function add(i,content,doSpan,doGrayout){
 
     td1.textContent = String(i);
     }
-    td2.textContent = content;
+    td2.style.color = `var(--${color[class_i]}${Number(lightmode.checked)}`;
+    td2.textContent = classes[class_i];
     tr1.append(td1);
     tr1.append(td2);
     tabbody.append(tr1);
@@ -191,30 +222,33 @@ function cal(){
         isprev = true;
     }
 
-    if(dat[d][0][1] == 0){
-        add(1,classes[dat[d][koza_i][0]],false,isprev)
-        add(2,classes[dat[d][kumi_i][1]],true,isprev)
+    let koza_a = dat[d][koza_i];
+    let kumi_a = dat[d][kumi_i];
 
-        add(0,classes[20],false,isprev)
-        add(4,classes[dat[d][koza_i][2]],false,isprev)
-        add(5,classes[dat[d][kumi_i][3]],true,isprev)
+    if(dat[d][0][1] == 0){
+        add(1,koza_a[0],false,isprev)
+        add(2,kumi_a[1],true,isprev)
+
+        add(0,20,false,isprev)
+        add(4,koza_a[2],false,isprev)
+        add(5,kumi_a[3],true,isprev)
 
     }else if(dat[d][0][1] == 1){
-        add(1,classes[dat[d][kumi_i][0]],true,isprev)
+        add(1,kumi_a[0],true,isprev)
 
-        add(3,classes[dat[d][koza_i][1]],false,isprev)
-        add(0,classes[20],false,isprev)
-        add(4,classes[dat[d][koza_i][2]],false,isprev)
-        add(5,classes[dat[d][koza_i][3]],false,isprev)
-        add(6,classes[dat[d][koza_i][4]],false,isprev)
+        add(3,koza_a[1],false,isprev)
+        add(0,20,false,isprev)
+        add(4,koza_a[2],false,isprev)
+        add(5,koza_a[3],false,isprev)
+        add(6,koza_a[4],false,isprev)
     }else if(dat[d][0][1] == 2){
-        add(1,classes[dat[d][koza_i][0]],false,isprev)
-        add(2,classes[dat[d][koza_i][1]],false,isprev)
-        add(3,classes[dat[d][koza_i][2]],false,isprev)
-        add(0,classes[20],false,isprev)
-        add(4,classes[dat[d][kumi_i][3]],true,isprev)
+        add(1,koza_a[0],false,isprev)
+        add(2,koza_a[1],false,isprev)
+        add(3,koza_a[2],false,isprev)
+        add(0,20,false,isprev)
+        add(4,kumi_a[3],true,isprev)
 
-        add(6,classes[dat[d][koza_i][4]],false,isprev)
+        add(6,koza_a[4],false,isprev)
     }
 
     cap.textContent = `${kumi.value}組 ${koza.value.toUpperCase()}講座　(下で設定)`
@@ -270,6 +304,19 @@ if(document.cookie=="data=" || document.cookie==""){
 
     updatetheme();
 }
+
+document.addEventListener("keydown",(e)=>{
+    switch (e.key){
+        case "ArrowLeft":
+        case "h":
+            left.click();
+            break;
+        case "ArrowRight":
+        case "l":
+            right.click();
+            break;
+    }
+})
 
 
 
