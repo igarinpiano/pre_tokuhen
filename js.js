@@ -167,17 +167,19 @@ function add(i,class_i,doSpan,doGrayout){
     const tr1 = document.createElement("tr");
     const td1 = document.createElement("td");
     const td2 = document.createElement("td");
-    if(doGrayout){
-        td1.style.color = "var(--fc3)";
-        td2.style.color = "var(--fc3)";
-    }
     if(i==0){
         td1.textContent = "";
     }else{
 
     td1.textContent = String(i);
     }
-    td2.style.color = `var(--${color[class_i]}${Number(lightmode.checked)}`;
+    if(doGrayout){
+        td1.style.color = "var(--fc3)";
+        td2.style.color = "var(--fc3)";
+    }else{
+        td2.style.color = `var(--${color[class_i]}${Number(lightmode.checked)})`;
+    }
+
     td2.textContent = classes[class_i];
     tr1.append(td1);
     tr1.append(td2);
@@ -226,7 +228,7 @@ let today_i = 0;
 for(let i =0;i<dat.length;i++){
     if(dat[i][0][0] == todaystr){
         today_i = i;
-        break;
+        breakja
     }
 }
 
@@ -305,13 +307,13 @@ lightmode.addEventListener("click",()=>{
     updatetheme();
 })
 
-if(document.cookie=="data=" || document.cookie==""){
+if(document.cookie=="dat=" || document.cookie==""){
     console.log("cookieない");
 }else{
     console.log(document.cookie);
 
-    let kumi_c = document.cookie[5];
-    let koza_c = document.cookie[6];
+    let kumi_c = document.cookie[4];
+    let koza_c = document.cookie[5];
     let lm_c = false;
     if(document.cookie.slice(6) == "true"){
         lm_c = true;
@@ -343,6 +345,7 @@ document.addEventListener("keydown",(e)=>{
 })
 
 
+d = today_i;
 
 cal();
 
