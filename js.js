@@ -36,11 +36,11 @@ function add(i,class_i,doSpan,doGrayout){
     if(doGrayout){
         td1.style.color = "var(--fc3)";
         td2.style.color = "var(--fc3)";
-    }else{
+    }else if(typeof class_i == "number"){
         td2.style.color = `var(--${color[class_i]}${Number(lightmode.checked)})`;
     }
 
-    td2.textContent = classes[class_i];
+    td2.textContent = typeof class_i == "number" ? classes[class_i] : class_i;
     tr1.append(td1);
     tr1.append(td2);
     tabbody.append(tr1);
@@ -69,10 +69,10 @@ function clear(){
 }
 
 right.addEventListener("click",()=>{
-    d++;
+    if(d < dat.length-1) d++;
 })
 left.addEventListener("click",()=>{
-    d--;
+    if(d > 0) d--;
 })
 
 /////////////           today
@@ -88,7 +88,7 @@ let today_i = 0;
 for(let i =0;i<dat.length;i++){
     if(dat[i][0][0] == todaystr){
         today_i = i;
-        breakja
+        break;
     }
 }
 
@@ -111,30 +111,16 @@ function cal(){
     let koza_a = dat[d][koza_i];
     let kumi_a = dat[d][kumi_i];
 
-    if(dat[d][0][1] == 0){
-        add(1,koza_a[0],false,isprev)
-        add(2,kumi_a[1],true,isprev)
-
-        add(0,20,false,isprev)
-        add(4,koza_a[2],false,isprev)
-        add(5,kumi_a[3],true,isprev)
-
-    }else if(dat[d][0][1] == 1){
-        add(1,kumi_a[0],true,isprev)
-
-        add(3,koza_a[1],false,isprev)
-        add(0,20,false,isprev)
-        add(4,koza_a[2],false,isprev)
-        add(5,koza_a[3],false,isprev)
-        add(6,koza_a[4],false,isprev)
-    }else if(dat[d][0][1] == 2){
-        add(1,koza_a[0],false,isprev)
-        add(2,koza_a[1],false,isprev)
-        add(3,koza_a[2],false,isprev)
-        add(0,20,false,isprev)
-        add(4,kumi_a[3],true,isprev)
-
-        add(6,koza_a[4],false,isprev)
+    // types (dat.js): per type, the blocks as [first period, length, 0 = 講座 / 1 = 組]
+    types[dat[d][0][1]].forEach(([p,len,by],j)=>{
+        let class_i = by == 1 ? kumi_a[j] : koza_a[j];
+        add(p,class_i,len == 2,isprev)
+        if(p+len-1 == 3){
+            add(0,classes.indexOf("SHR"),false,isprev)
+        }
+    })
+    if(dat[d][0][2]){
+        add(0,dat[d][0][2],false,isprev)  // all-day event
     }
 
     cap.textContent = `${kumi.value}組 ${koza.value.toUpperCase()}講座　(下で設定)`
