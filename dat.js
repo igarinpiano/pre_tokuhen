@@ -1,4 +1,4 @@
-// Generated from 前期特編 時間割 (data/timetable.json, updated 2026-11-23)
+// Generated from 前期特編 時間割 (data/timetable.json, updated 2026-11-28)
 // by https://github.com/igarinpiano/pre-tokuhen/blob/main/scripts/export-legrs.mjs
 let koza_val=[
 "a",
